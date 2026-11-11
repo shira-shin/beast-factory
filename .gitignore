@@ -1,0 +1,4 @@
+test.html
+sfx/sources/
+*.backup.html
+__pycache__/
