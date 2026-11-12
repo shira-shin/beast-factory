@@ -1752,7 +1752,7 @@ const Assets = (() => {
     FX_NAMES.forEach(n => jobs.push(loadImg((window.FX_DATA && window.FX_DATA[n]) || `assets/fx/${n}.png`).then(im => { if (im) fxImg[n] = im; tick(); })));
     const BD = {};
     if (window.BEAST_DATA) for (const k in window.BEAST_DATA) { const b = BEAST_BY_ID[k] || guessBeast(k); if (b) BD[b.id] = window.BEAST_DATA[k]; }
-    ALL_BEASTS.filter(b => IMAGE_MANIFEST.beasts.includes(b.id) || BD[b.id]).forEach(b => jobs.push(loadImg(BD[b.id] || `assets/beasts/${b.id}.webp`).then(im => { if (im) beastImg[b.id] = im; tick(); })));
+    ALL_BEASTS.filter(b => IMAGE_MANIFEST.beasts.includes(b.id) || BD[b.id]).forEach(b => jobs.push((BD[b.id] ? loadImg(BD[b.id]) : loadImg(`assets/beasts/${b.id}.webp`).then(im => im || loadImg(`assets/beasts/${b.id}.png`))).then(im => { if (im) beastImg[b.id] = im; tick(); })));
     IMAGE_MANIFEST.bg.forEach(n => jobs.push(loadImg(`assets/bg/${n}.jpg`).then(im => { if (im) bgImg[n] = im; tick(); })));
     await Promise.all(jobs);
     await loadUserImages();

@@ -1,5 +1,5 @@
-// 生成画像を置いたらここにIDを追記する（assets/beasts/<id>.webp, assets/bg/<name>.jpg）
+// build.py が assets/beasts の中身から自動生成する。手で編集しない
 const IMAGE_MANIFEST = {
-  beasts: ['arthur', 'jester', 'kirin', 'kraken', 'silva'],
+  beasts: ["arthur", "jester", "kirin", "kraken", "silva"],
   bg: [],
 };

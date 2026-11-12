@@ -2,3 +2,4 @@ test.html
 sfx/sources/
 *.backup.html
 __pycache__/
+assets/beasts_src/
