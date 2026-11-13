@@ -1,0 +1,10 @@
+'use strict';
+const RosterUI=(()=>{
+ const make=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;if(text!==undefined)n.textContent=text;return n};
+ function role(m){const s=m.st,utility=m.moves.filter(x=>x.c==='s').length;if(m.moves.some(x=>x.heal||x.healTeam)&&utility>=2)return'支援';if(s.def+s.res>s.atk+s.mag+45)return'守護';if(s.spd>105)return'遊撃';return s.mag>s.atk?'術師':'前衛'}
+ const base=monCard;monCard=function(m,opt){const card=base(m,opt),profile=make('section','roster-profile'),identity=make('div','roster-identity');identity.append(make('span','roster-role',role(m)),make('span','roster-resonance',m.types.map(t=>TYPES[t].n).join(' / ')));const stats=make('div','roster-key-stats');for(const[label,value]of[['耐久',m.maxhp],[m.st.mag>m.st.atk?'術式':'打撃',Math.max(m.st.mag,m.st.atk)],['機動',m.st.spd]]){const s=make('div','');s.append(make('span','',label),make('b','',String(value)));stats.appendChild(s)}
+  const seal=make('div','roster-seal');seal.append(make('span','','封印刻'),make('b','',ForgeCombat.SIG[m.id][0]),make('p','',ForgeCombat.SIG[m.id][1]));const kit=make('div','roster-kit');kit.append(Assets.itemIcon(m.item,19),make('span','',ITEMS[m.item].n));profile.append(identity,stats,seal,kit);card.querySelector('.main').appendChild(profile);card.dataset.role=role(m);return card;
+ };
+ const draft=ValgaUI.draft;ValgaUI.draft=function(team){draft(team);const box=document.getElementById('draftSummary');box.replaceChildren();box.appendChild(make('div','draft-heading',`契約 ${team.length} / 3`));const tray=make('div','draft-tray');for(let i=0;i<3;i++){const m=team[i],slot=make(m?'button':'div','draft-slot'+(m?' filled':''));if(m){slot.type='button';slot.append(Assets.portrait(m.beast,42,38,m.mutant),make('span','',m.name));slot.setAttribute('aria-label',m.name+'の選択を外す');slot.onclick=()=>[...document.querySelectorAll('#rentCards>.card')].find(c=>c._mon===m)?.click()}else slot.append(make('span','draft-empty',String(i+1)),make('span','','未選択'));tray.appendChild(slot)}box.appendChild(tray)};
+ return{role};
+})();

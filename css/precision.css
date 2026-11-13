@@ -1,0 +1,63 @@
+/* Portraits never participate in intrinsic card sizing. */
+.card .win{position:relative;min-width:0;isolation:isolate}
+.card .win canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important}
+.card .main,.swapcols>div,.swapcols .cards{min-width:0}
+.swapcols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+#scr-swap{gap:9px}
+#scr-swap>.result{padding:8px 18px!important;border:0!important;border-radius:0!important;background:transparent!important;display:flex;flex-direction:row;justify-content:space-between;align-items:center;text-align:left;min-height:54px;box-shadow:none}
+#scr-swap>.result .big{font:500 28px var(--f-display)!important;letter-spacing:.12em}
+#scr-swap>.result #swapMsg{font-size:12px;color:#a5b095}
+#scr-swap>.head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0;padding-bottom:8px}
+#scr-swap>.head h2{font-size:20px;margin:0}#scr-swap>.head p{margin:0;font-size:11px;color:#9fa990}
+#scr-swap .swapcols>div{gap:6px}#scr-swap .swapcols h3{font:500 13px var(--f-display);letter-spacing:.05em;margin:0 4px 1px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.trade-picked{font:10px var(--f-body);color:#aebfa0;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#scr-swap .card{display:flex!important;flex-direction:column;grid-template-columns:none!important;min-width:0;border-radius:22px!important}
+#scr-swap .card[hidden]{display:none!important}
+#scr-swap .card .spine{flex:none!important;display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;padding:10px 15px!important;gap:10px;min-height:42px;background:#52634a1b!important}
+#scr-swap .vname{writing-mode:horizontal-tb!important;font-size:17px!important;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#scr-swap .tsl{display:flex;flex-direction:row!important;gap:4px;margin-right:50px;flex:none}
+#scr-swap .tsl .tk{border-radius:50%;width:21px;height:21px;font-size:11px;opacity:.75}
+#scr-swap .card .main{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);grid-template-rows:auto auto auto auto auto;gap:8px 14px;flex:1;min-height:0;padding:8px 15px 12px!important;align-content:center;overflow:hidden}
+#scr-swap .card .win{grid-column:1;grid-row:1/6;align-self:stretch;min-height:0!important;max-height:none!important;height:100%!important;flex:none;background:radial-gradient(ellipse at 50% 66%,#a3b88814,transparent 72%)!important}
+#scr-swap .card .win .ttl{top:0;left:0;max-width:100%;font-size:10px;color:#8fa383!important}
+#scr-swap .card .stats{display:grid!important;grid-column:2;grid-row:1;gap:3px 6px;font-size:10px;min-width:0}
+#scr-swap .card .meta{grid-column:2;grid-row:2;font-size:10px;line-height:1.45;min-width:0}
+#scr-swap .card .meta>div{display:flex;flex-direction:column;gap:1px;margin:4px 0}#scr-swap .card .meta b{font-size:11px}
+#scr-swap .card .mvs{grid-column:2;grid-row:3;min-width:0;display:grid!important;grid-template-columns:minmax(0,1fr);gap:3px}
+#scr-swap .card .mv{font-size:10px;padding:2px 5px;min-width:0}#scr-swap .card .mv span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#scr-swap .card .ultline{grid-column:2;grid-row:4;font-size:10px;min-width:0;line-height:1.5}
+#scr-swap .card .signature-line{grid-column:2;grid-row:5;min-width:0;margin:0;padding-top:4px;line-height:1.4}
+#scr-swap .card .signature-line b{font-size:10px}
+#scr-swap .card-info{top:8px;right:9px;min-height:27px;font-size:10px;z-index:5}
+#scr-swap .card .stamp{top:49px!important;right:auto!important;left:12px!important;width:38px!important;height:38px!important;font-size:17px!important;line-height:34px!important;border-width:1px;pointer-events:none}
+#scr-swap .card .stamp{mix-blend-mode:normal!important;color:#f0d9a8!important;background:#816a39b8!important;transform:none!important;opacity:1!important}
+#scr-swap .card.sel{border-color:#d2bd83!important;box-shadow:inset 0 0 0 1px #d2bd8340!important}
+#scr-swap .pager{margin:0;min-height:32px;gap:9px}#scr-swap .pager button{min-height:30px;min-width:36px;font-size:11px;padding:3px 10px}
+#scr-swap>.row:last-child{padding-top:3px;gap:10px}
+#scr-swap>.row:last-child .btn{min-height:40px;padding:7px 22px;font-size:13px;max-width:65%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#scr-swap:not([hidden]){animation:trade-reveal .24s ease-out both}
+@keyframes trade-reveal{from{opacity:0}to{opacity:1}}
+@media(min-width:1050px) and (min-height:800px){#scr-swap .card .main{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:10px 20px;padding:15px 20px 18px!important}#scr-swap .card .stats{font-size:11px;gap:5px 7px}#scr-swap .card .meta{font-size:11px}#scr-swap .card .mvs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:700px) and (orientation:portrait){
+ #scr-swap{gap:6px}#scr-swap>.result{min-height:43px;padding:3px 2px!important;gap:12px}#scr-swap>.result .big{font-size:24px!important}#scr-swap>.result #swapMsg{font-size:10px;max-width:65%;text-align:right}
+ #scr-swap>.head{align-items:center;gap:7px}#scr-swap>.head h2{font-size:17px}#scr-swap>.head p{font-size:9px;max-width:56%;line-height:1.4}
+ #scr-swap .swapcols{gap:8px}#scr-swap .swapcols h3{font-size:10px;flex-direction:column;align-items:flex-start;gap:3px}.trade-picked{font-size:8px;max-width:100%;min-height:12px}
+ #scr-swap .card{border-radius:17px!important}#scr-swap .card .spine{min-height:36px;padding:8px!important;gap:3px}#scr-swap .vname{font-size:12px!important;max-width:100%}#scr-swap .tsl{display:none}
+ #scr-swap .card .main{display:flex!important;flex-direction:column;gap:5px;padding:5px 8px 8px!important;justify-content:flex-end;align-content:normal}
+ #scr-swap .card .win{flex:1!important;width:100%;height:auto!important;min-height:60px!important;max-height:none!important;align-self:stretch}
+ #scr-swap .card .win .ttl{font-size:8px}#scr-swap .card .stats{flex:none;font-size:9px;gap:1px 4px}#scr-swap .card .meta{display:none!important}
+ #scr-swap .card .mvs{display:grid!important;flex:none;font-size:9px;gap:2px}#scr-swap .card .mv{font-size:9px;padding:2px 3px}
+ #scr-swap .card .ultline{font-size:8px;line-height:1.4;flex:none}#scr-swap .card .ultline .d{display:none}#scr-swap .card .signature-line{display:none!important}
+ #scr-swap .card-info{top:37px;right:5px;min-height:23px;font-size:8px;padding:2px 7px;opacity:.85}#scr-swap .card .stamp{top:40px!important;left:7px!important;width:29px!important;height:29px!important;line-height:25px!important;font-size:13px!important}
+ #scr-swap>.row:last-child .btn{font-size:11px;padding:6px 13px;min-height:37px}#scr-swap .pager{font-size:11px;gap:3px;min-height:30px}#scr-swap .pager button{font-size:9px;min-width:29px;padding-inline:6px}
+}
+@media(max-height:680px) and (orientation:portrait){#scr-swap .card .mvs{display:none!important}#scr-swap .card .stats{gap:0 4px;font-size:8px}#scr-swap .card .win{min-height:48px!important}#scr-swap>.result{min-height:34px}#scr-swap>.result .big{font-size:21px!important}}
+@media(max-height:560px) and (orientation:landscape){
+ #scr-swap{gap:4px}#scr-swap>.result{min-height:29px;padding:0 3px!important}#scr-swap>.result .big{font-size:21px!important}#scr-swap>.result #swapMsg{font-size:9px}#scr-swap>.head{display:none}
+ #scr-swap .swapcols{gap:9px}#scr-swap .swapcols h3{font-size:10px;margin:0;gap:5px}#scr-swap .trade-picked{font-size:8px}
+ #scr-swap .card .spine{min-height:28px;padding:5px 10px!important}#scr-swap .vname{font-size:12px!important}#scr-swap .card .main{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);grid-template-rows:1fr;align-content:stretch;padding:3px 10px 5px!important;gap:7px}
+ #scr-swap .card .win{grid-row:1;grid-column:1;height:100%!important;min-height:0!important}#scr-swap .card .stats{grid-column:2;grid-row:1;align-self:center;font-size:8px;gap:1px 4px}
+ #scr-swap .card .meta,#scr-swap .card .mvs,#scr-swap .card .ultline,#scr-swap .card .signature-line{display:none!important}#scr-swap .card-info{top:3px;min-height:22px;font-size:8px}
+ #scr-swap .pager{min-height:24px;font-size:10px}#scr-swap .pager button{min-height:24px;padding:2px 7px;font-size:9px}#scr-swap>.row:last-child{min-height:31px!important;padding:0}#scr-swap>.row:last-child .btn{min-height:30px;font-size:11px;padding:4px 16px}#scr-swap .card .stamp{top:30px!important;left:5px!important;width:25px!important;height:25px!important;line-height:21px!important;font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){#scr-swap:not([hidden]){animation:none}}

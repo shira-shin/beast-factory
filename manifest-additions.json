@@ -1,0 +1,37 @@
+{
+  "beasts": [
+    "ignivolg",
+    "vulcanos",
+    "homura",
+    "leviaru",
+    "mare",
+    "aquamira",
+    "druida",
+    "mandra",
+    "silva",
+    "voltis",
+    "galva",
+    "raika",
+    "frostheim",
+    "setsuna",
+    "crystalos",
+    "legion",
+    "zanba",
+    "abyss",
+    "necros",
+    "jester",
+    "seraph",
+    "arthur",
+    "kirin",
+    "gorgo",
+    "brute",
+    "phoenix",
+    "kraken",
+    "moth",
+    "chaostia",
+    "grimwald"
+  ],
+  "bg": [
+    "arena"
+  ]
+}

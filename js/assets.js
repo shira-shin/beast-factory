@@ -1,8 +1,9 @@
+
 // ===== アセット読み込み（エフェクトテクスチャ／魔獣画像） =====
 'use strict';
 
 const Assets = (() => {
-  const FX_NAMES = ['circle_01', 'circle_02', 'circle_03', 'circle_04', 'circle_05', 'dirt_01', 'dirt_02', 'dirt_03', 'fire_01', 'fire_02',
+  const FX_NAMES = ['ritual-fields','ritual-rift','ritual-veil','ritual-ward','ritual-restore','ritual-fracture','ritual-states','ink-fire','ink-water','ink-ice','ink-thunder','ink-wood','ink-dark','ink-holy','ink-steel',"valga-seal", 'circle_01', 'circle_02', 'circle_03', 'circle_04', 'circle_05', 'dirt_01', 'dirt_02', 'dirt_03', 'fire_01', 'fire_02',
     'flame_01', 'flame_02', 'flame_03', 'flame_04', 'flame_05', 'flame_06', 'flare_01', 'light_01', 'light_02', 'light_03',
     'magic_01', 'magic_02', 'magic_03', 'magic_04', 'magic_05', 'muzzle_01', 'muzzle_02', 'muzzle_03', 'muzzle_04', 'muzzle_05',
     'scorch_01', 'scorch_02', 'scorch_03', 'scratch_01', 'slash_01', 'slash_02', 'slash_03', 'slash_04',
@@ -13,24 +14,29 @@ const Assets = (() => {
   const fxImg = {};      // name -> HTMLImageElement
   const beastImg = {};   // id -> HTMLImageElement（生成画像が置かれていれば）
   const bgImg = {};      // name -> HTMLImageElement
+  const itemImg={};
+  const stateCells={brn:0,psn:1,par:2,slp:3,frz:4,crs:5,cnf:6,protect:7};
+  function itemIcon(id,size=24){const im=document.createElement('img');im.className='relic-icon';im.width=im.height=size;im.alt=ITEMS[id]?.n||'';im.src=itemImg[id]?.src||window.VALGA_FILES?.['assets/items/'+id+'.webp']||'assets/items/'+id+'.webp';im.draggable=false;return im}
+  function stateIcon(state,size=16){const cell=stateCells[state];if(cell===undefined)return document.createTextNode('');const span=document.createElement('span');span.className='state-art';span.style.width=span.style.height=size+'px';const im=fxImg['ritual-states'];if(im)span.style.backgroundImage='url("'+im.src+'")';span.style.backgroundPosition=(cell%4)*100/3+'% '+Math.floor(cell/4)*100+'%';span.setAttribute('role','img');span.setAttribute('aria-label',STATUS_N[state]||'防護');return span}
 
   function loadImg(src) {
     return new Promise(res => {
       const im = new Image();
       im.onload = () => res(im);
       im.onerror = () => res(null);
-      im.src = src;
+      im.src = window.VALGA_FILES?.[src] || src;
     });
   }
   async function loadAll(onProgress) {
     const jobs = [];
-    let done = 0; const total = FX_NAMES.length + IMAGE_MANIFEST.beasts.length + IMAGE_MANIFEST.bg.length + Object.keys(window.BEAST_DATA || {}).length;
+    let done = 0; const total = FX_NAMES.length + IMAGE_MANIFEST.beasts.length + IMAGE_MANIFEST.bg.length + Object.keys(ITEMS).length + Object.keys(window.BEAST_DATA || {}).length;
     const tick = () => { done++; onProgress && onProgress(done / total); };
     FX_NAMES.forEach(n => jobs.push(loadImg((window.FX_DATA && window.FX_DATA[n]) || `assets/fx/${n}.png`).then(im => { if (im) fxImg[n] = im; tick(); })));
     const BD = {};
     if (window.BEAST_DATA) for (const k in window.BEAST_DATA) { const b = BEAST_BY_ID[k] || guessBeast(k); if (b) BD[b.id] = window.BEAST_DATA[k]; }
-    ALL_BEASTS.filter(b => IMAGE_MANIFEST.beasts.includes(b.id) || BD[b.id]).forEach(b => jobs.push((BD[b.id] ? loadImg(BD[b.id]) : loadImg(`assets/beasts/${b.id}.webp`).then(im => im || loadImg(`assets/beasts/${b.id}.png`))).then(im => { if (im) beastImg[b.id] = im; tick(); })));
+    ALL_BEASTS.filter(b => IMAGE_MANIFEST.beasts.includes(b.id) || BD[b.id]).forEach(b => jobs.push(loadImg(BD[b.id] || `assets/beasts/${b.id}.webp`).then(im => { if (im) beastImg[b.id] = im; tick(); })));
     IMAGE_MANIFEST.bg.forEach(n => jobs.push(loadImg(`assets/bg/${n}.jpg`).then(im => { if (im) bgImg[n] = im; tick(); })));
+    Object.keys(ITEMS).forEach(id=>jobs.push(loadImg('assets/items/'+id+'.webp').then(im=>{if(im)itemImg[id]=im;tick()})));
     await Promise.all(jobs);
     await loadUserImages();
   }
@@ -59,11 +65,14 @@ const Assets = (() => {
   async function dbDel(id) { const d = await db(); return new Promise(res => { const tx = d.transaction(DB.store, 'readwrite'); tx.objectStore(DB.store).delete(id); tx.oncomplete = res; tx.onerror = res; }); }
   async function loadUserImages() {
     try {
-      const all = await dbAll();
+      if (localStorage.getItem('valga_useImported') === 'false') { const all = await dbAll(); importedIds = Object.keys(all); return; }
+      const all = await dbAll(); importedIds = Object.keys(all);
       for (const id in all) { const im = await loadImg(URL.createObjectURL(all[id])); if (im) { beastImg[id] = im; userIds.add(id); } }
     } catch (e) { /* 保存領域が使えない環境では何もしない */ }
   }
-  const userIds = new Set();
+  const userIds = new Set(); let importedIds = [];
+  // 標準の絵は右向き。取り込んだ絵は既定で左向き（旧版の生成指示が左向き）として扱い、味方・敵とも相手の方を向かせる
+  function faceSign(id) { if (!userIds.has(id)) return 1; return localStorage.getItem('valga_importFacing') === 'right' ? 1 : -1; }
 
   // 英語名・別名（生成ツールが付けがちな名前）
   const ALIASES = {
@@ -168,7 +177,7 @@ const Assets = (() => {
       const dw = im.width * r, dh = im.height * r;
       ctx.save();
       if (mutant) ctx.filter = `hue-rotate(${mutant}deg) saturate(1.2)`;
-      if (flip) { ctx.translate(w, 0); ctx.scale(-1, 1); }
+      if (flip !== (faceSign(beast.id) < 0)) { ctx.translate(w, 0); ctx.scale(-1, 1); }
       ctx.drawImage(im, (w - dw) / 2, h - dh, dw, dh);
       ctx.restore();
     } else {
@@ -179,5 +188,7 @@ const Assets = (() => {
     return cv;
   }
 
-  return { FX_NAMES, fxImg, beastImg, bgImg, loadAll, drawShadowForm, portrait, hasImage: id => !!beastImg[id], guessBeast, processFile, saveImage, removeImage, userIds };
+  return { FX_NAMES, fxImg, beastImg, bgImg,itemImg,itemIcon,stateIcon,stateCells, loadAll, drawShadowForm, portrait, hasImage: id => !!beastImg[id], guessBeast, processFile, saveImage, removeImage, userIds, faceSign, get importedIds() { return importedIds; } };
 })();
+
+

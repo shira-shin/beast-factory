@@ -1,0 +1,42 @@
+battles 20000 deadlocks 0
+ 53.7 voltis     ヴォルティス n=4277 turns=9.9
+ 53.4 legion     アイアン・レギオン n=4170 turns=10.3
+ 52.7 zanba      剣鬼ザンバ n=4311 turns=9.7
+ 52.7 seraph     セラフィエル n=4212 turns=10.2
+ 52.3 phoenix    フェニクシア n=4263 turns=11.3
+ 51.8 abyss      アビス・アイ n=4310 turns=10
+ 51.6 frostheim  フロストヘイム n=4278 turns=9.8
+ 51.4 leviaru    リヴァイアル n=4303 turns=10.6
+ 51.3 homura     焔姫ホムラ n=4208 turns=10.2
+ 50.8 aquamira   アクアミラ n=4345 turns=11.2
+ 50.5 druida     ドルイダ n=4283 turns=13.5
+ 50.2 mare       潮騎士マーレ n=4214 turns=10.2
+   50 ignivolg   イグニヴォルグ n=4407 turns=9.9
+ 49.8 necros     ネクロス n=4293 turns=10.3
+ 49.7 gorgo      ゴルゴニア n=4262 turns=10.6
+ 49.3 setsuna    雪華姫セツナ n=4299 turns=9.5
+ 49.2 jester     ジェスター n=4337 turns=10.1
+   49 raika      紫電狐ライカ n=4319 turns=9.8
+   49 brute      ベヒモス n=4311 turns=10.4
+ 48.7 moth       ルナモス n=4308 turns=10.3
+ 48.3 crystalos  クリスタロス n=4333 turns=11.4
+ 48.2 kraken     クラーケン n=4398 turns=10.3
+ 48.1 galva      ガルヴァ・MkIII n=4253 turns=10.3
+ 47.9 silva      シルヴァディア n=4220 turns=10.3
+ 47.9 kirin      白麒麟 n=4236 turns=11.2
+ 47.8 arthur     聖騎士アルトリウス n=4328 turns=10.2
+ 47.5 vulcanos   ヴァルカノス n=4291 turns=10.9
+ 47.2 mandra     マンドラゴア n=4231 turns=11
+sd 1.87
+r1n1:88% r1n4:87% r1n7:75% r2n1:74% r2n7:56% r3n1:64% r3n4:61% r3n7:35% r4n4:43% r6n7:8%
+{
+  runs: 400,
+  median: 5,
+  p25: 2,
+  p75: 8,
+  p90: 11,
+  reach7: '34.5%',
+  reach14: '4.0%',
+  reach21: '0.3%',
+  reach42: '0.0%'
+}

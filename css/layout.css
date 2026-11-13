@@ -1,0 +1,52 @@
+/* ===== 一目でわかる表示 ===== */
+/* 術ボタン：名前・威力・効果文・相性を常時表示 */
+#cmd .mbtn.mx{position:relative;display:flex!important;flex-direction:column;align-items:flex-start;gap:2px;padding:8px 54px 8px 12px!important;min-height:86px;text-align:left}
+#cmd .mbtn.mx .mn{font-size:16px!important;font-weight:800!important;max-width:100%!important;color:#fff7e2}
+#cmd .mbtn.mx .mn .tk{width:20px!important;height:20px!important;font-size:12px!important}
+#cmd .mbtn.mx .ms{font-size:11px!important;color:#d6dcc8!important;letter-spacing:.02em}
+#cmd .mbtn.mx .m-desc{display:block;font-size:12px;line-height:1.4;color:#f3ead2;white-space:normal;text-shadow:0 1px 2px #000}
+#cmd .mbtn.mx .m-pow{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;align-items:center;min-width:40px;font:900 22px/1 var(--f-num,var(--f-display));color:#fff;text-shadow:0 2px 0 #000}
+#cmd .mbtn.mx .m-pow small{font:700 10px var(--f-body);color:#d8ccb0;margin-bottom:2px}
+#cmd .mbtn.mx .reaction-hint{font-size:10.5px!important;opacity:.95}
+#cmd .mbtn.mx .reload-tag{position:absolute!important;right:8px!important;top:auto!important;bottom:6px!important;font-size:10px!important}
+#cmd .mbtn.mx .eff{display:none!important}
+.mx-eff{font-style:normal;font-weight:900;font-size:11px;padding:1px 6px;border-radius:8px;margin-right:6px;vertical-align:1px}
+.mx-eff.x3{background:#e8321f;color:#fff}.mx-eff.x2{background:#e8842e;color:#1a0d04}.mx-eff.x05{background:#4a5470;color:#dfe4f4}
+#cmd .mbtn.mx:disabled{opacity:.55}
+#cmd .ubtn .m-desc{display:block;font-size:11px;margin-top:2px;opacity:.95}
+#cmd .sbtn small{display:block;font-size:9px;line-height:1.25;font-weight:500;opacity:.8;margin-top:2px;white-space:normal}
+.stance-desc{font-size:12px!important;color:#efe4c8!important}
+.stance-button{font-size:14px!important}
+.turn-bar{font-size:12px!important}
+
+/* 相手の狙い：相手パネルの下・大きめの文字 */
+#combatCues.combat-cues{left:auto;max-width:46%!important;font-size:12.5px!important;line-height:1.55;padding:8px 12px!important;border-left:0!important;border-right:3px solid #e0584a;border-radius:12px 0 0 12px!important;background:linear-gradient(270deg,#2a0c0ccc,#120808aa 70%,transparent)!important;text-align:right}
+#combatCues .tell{font-size:15px!important;color:#ffe0c0!important;font-weight:700!important}
+#combatCues .tell::before{content:"相手の狙い　";font:900 11px var(--f-body);color:#ff8a7a;letter-spacing:.1em}
+#combatCues .c-state{font-size:12px!important;color:#f0dcc8!important}
+#combatCues .sig-cue{display:block!important;font-size:11px!important;color:#cdbfae!important}
+
+/* 札の術一覧：効果文を常に表示 */
+.card .mvs .mv{flex-wrap:wrap;row-gap:1px}
+.card .mvs .mv .mv-d{flex-basis:100%;font-size:10px;line-height:1.35;color:#c9c0a8;font-weight:400;white-space:normal}
+
+@media (max-width:700px){
+  #cmd .mbtn.mx{min-height:74px;padding:6px 44px 6px 9px!important}
+  #cmd .mbtn.mx .mn{font-size:14px!important}
+  #cmd .mbtn.mx .m-desc{font-size:11px}
+  #cmd .mbtn.mx .m-pow{font-size:18px;min-width:32px}
+  #combatCues.combat-cues{font-size:10.5px!important;max-width:58%!important}
+  #combatCues .tell{font-size:12px!important}
+  #combatCues .sig-cue{display:none!important}
+}
+
+/* 札：はみ出した能力欄が上で切れないよう、溢れたらスクロール */
+.card .main{overflow-y:auto!important;scrollbar-width:thin;scrollbar-color:#d6b57855 transparent}
+#scr-swap .card .main{align-content:safe center!important;justify-content:safe flex-end}
+.card .main::-webkit-scrollbar{width:5px}.card .main::-webkit-scrollbar-thumb{background:#d6b57855;border-radius:3px}
+@media (max-width:700px){
+  #cmd .mbtn.mx .ms{white-space:normal!important;padding-right:4px}
+  #cmd .sbtn small{display:none}
+  #combatCues.combat-cues{padding:5px 8px!important}
+  #combatCues .c-state{font-size:10px!important}
+}

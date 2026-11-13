@@ -1,3 +1,4 @@
+
 // ===== 魔獣の手続き型描画 =====
 'use strict';
 
@@ -548,3 +549,4 @@ const Art = (() => {
 
   return { drawBeast, portrait, shade, rgba, ell, glow, flame, lgrad, rgrad };
 })();
+

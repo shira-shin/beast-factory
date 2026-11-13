@@ -1,0 +1,60 @@
+.mbtn:disabled{opacity:.43;filter:saturate(.35);cursor:wait}
+.reload-tag{position:absolute;right:6px;top:4px;font:9px var(--f-ui);color:#d9bb86;letter-spacing:.02em}
+.mbtn .eff{display:none}
+#scr-battle .actrow.with-breath{grid-template-columns:minmax(0,1fr) 57px 57px}
+.breath-button{color:#b9d3c5!important;border-color:#6c8b7b!important;font-size:11px}
+.battle-mode{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:7px auto;max-width:700px}
+.battle-mode .btn{min-height:32px;padding:5px 12px;font-size:12px}
+.battle-mode .btn[aria-pressed=true]{background:#632f25;color:#f1dfbd;border-color:#9d674b}
+.battle-mode small{flex-basis:100%;text-align:center;color:#8c7d70;font-size:10px}
+.duo-battle .combat-cues,.duo-battle #signatureButton{display:none!important}
+.duo-roster{position:absolute;z-index:4;pointer-events:none;inset:8px 16px 202px;display:flex;flex-direction:column;justify-content:space-between;line-height:1.4}
+.duo-team{display:grid;grid-template-columns:1fr 1fr;gap:20%;width:100%}
+.duo-unit{display:flex;flex-direction:column;gap:3px;max-width:230px;padding:6px 9px;background:#141018bf;border-left:2px solid #9c7550;color:#dfd5c1;font-size:11px;text-shadow:0 1px 3px #000}
+.duo-unit b{font-size:12px}.duo-unit span,.duo-unit small{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.duo-unit .duo-intent{color:#efc18f}.duo-unit.fallen{opacity:.3}
+.duo-hp{height:4px;width:100%;background:linear-gradient(90deg,#92b58b var(--hp),#33313b var(--hp))}
+.duo-selector,.duo-targets{display:flex;gap:4px;min-width:0;align-items:center}
+.duo-select,.duo-target{flex:1;min-width:0;min-height:29px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:3px 6px;background:#19151d;border:1px solid #54473d;color:#c0b7a5;font-size:11px}
+.duo-select[aria-pressed=true],.duo-target[aria-pressed=true]{border-color:#c2915c;color:#f4d5a1;background:#422c23}
+.duo-targets>span{font-size:10px;color:#ad9273}
+body.duo-battle #scr-battle #cmd{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.duo-battle .stance-strip,.duo-battle .duo-actions,.duo-battle .duo-summary{grid-column:1/-1}
+body.duo-battle #scr-battle .moves{grid-column:1/-1;grid-template-columns:repeat(4,minmax(0,1fr))}
+.duo-actions{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:5px}
+body.duo-battle #scr-battle .duo-actions>*{min-height:32px;padding:4px 10px;font-size:12px}
+.duo-summary{font-size:10px;color:#c1b293;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.duo-battle .duo-commit{background:#8d4029;border-color:#c1834f}.duo-commit:disabled{opacity:.35}
+body.duo-battle #scr-battle .hud{height:265px;min-height:265px;max-height:265px}
+.duo-battle .duo-roster{bottom:275px}
+@media(max-width:1050px){body.duo-battle #scr-battle .hud{height:285px;min-height:285px;max-height:285px}.duo-battle .duo-roster{bottom:292px}.duo-unit{max-width:180px}}
+@media(max-width:700px) and (orientation:portrait){
+ body.duo-battle #scr-battle .hud{height:calc(355px + env(safe-area-inset-bottom,0px));min-height:calc(355px + env(safe-area-inset-bottom,0px));max-height:calc(355px + env(safe-area-inset-bottom,0px))}
+ body.duo-battle #scr-battle #cmd{grid-template-columns:1fr;gap:4px}
+ body.duo-battle #scr-battle .moves{grid-template-columns:1fr 1fr;gap:4px}
+ body.duo-battle #scr-battle .mbtn{min-height:48px;padding:5px 6px 3px 10px}
+ body.duo-battle #scr-battle .mbtn .mn{font-size:11px}
+ .duo-select,.duo-target{min-height:26px;font-size:10px;padding:3px 5px}
+ .duo-battle .stance-strip{min-height:27px}.duo-battle .stance-button{min-height:27px}
+ .duo-battle .reload-tag{font-size:8px;right:4px;top:2px}
+ .duo-battle .duo-roster{inset:5px 8px calc(361px + env(safe-area-inset-bottom,0px));gap:10px}
+ .duo-team{gap:8%}.duo-unit{padding:4px 6px;gap:2px;max-width:none}.duo-unit b{font-size:10px}.duo-unit span,.duo-unit small{font-size:8px}.duo-unit small:not(.duo-intent){display:none}
+ body.duo-battle #scr-battle .duo-actions>*{min-height:30px;font-size:11px;padding:3px 6px}
+ .duo-summary{font-size:9px}
+}
+@media(max-height:680px) and (orientation:portrait){
+ body.duo-battle #scr-battle .hud{height:330px;min-height:330px;max-height:330px}
+ .duo-battle .duo-roster{bottom:334px}.duo-battle .duo-unit{padding:3px 4px}.duo-unit span{font-size:7px}
+ body.duo-battle #scr-battle .mbtn{min-height:43px}.duo-battle .duo-select,.duo-battle .duo-target{min-height:24px}.duo-battle .stance-strip,.duo-battle .stance-button{min-height:24px}
+}
+@media(max-height:560px) and (orientation:landscape){
+ .battle-mode{margin:1px auto;gap:3px}.battle-mode .btn{min-height:24px;padding:3px 10px;font-size:10px}.battle-mode small{display:none}
+ body.duo-battle #scr-battle .hud{height:100%;min-height:100%;max-height:100%;width:300px;left:auto;right:0;padding:5px 7px}
+ body.duo-battle #scr-battle #cmd{display:flex;flex-direction:column;gap:4px}
+ body.duo-battle #scr-battle .moves{display:grid;grid-template-columns:1fr 1fr}
+ body.duo-battle #scr-battle .mbtn{min-height:49px;padding:4px 5px 3px 10px}
+ body.duo-battle #scr-battle .duo-actions>*{min-height:29px;font-size:10px;padding:3px 5px}
+ .duo-battle .duo-select,.duo-battle .duo-target{min-height:25px;font-size:9px}
+ .duo-battle .duo-roster{inset:5px 310px 8px 8px}.duo-battle .duo-team{gap:10%}.duo-unit b{font-size:10px}.duo-unit span,.duo-unit small{font-size:8px}.duo-unit{padding:4px 6px}
+ .duo-battle .stance-strip,.duo-battle .stance-button{min-height:25px}.duo-battle .stance-desc{display:none}.duo-battle .reload-tag{font-size:8px}
+}
